@@ -5,7 +5,7 @@ scalaVersion := "2.11.7"
 crossScalaVersions := Seq("2.11.7")
 
 libraryDependencies ++= Seq(
-  "com.typesafe.play" %% "play-json" % "2.5.0" % "provided",
+  "com.typesafe.play" %% "play-json" % "2.6.0-M1" % "provided",
   "org.specs2" %% "specs2-core" % "3.4" %  "test"
 )
 
@@ -28,24 +28,26 @@ pomExtra := {
 }
 pomIncludeRepository := { _ => false }
 
-// Release settings
-sonatypeProfileName := "com.typesafe"
-releasePublishArtifactsAction := PgpKeys.publishSigned.value
-releaseCrossBuild := true
-releaseTagName := (version in ThisBuild).value
+publishTo := Some("phoenix" at s"https://api.bintray.com/maven/typesafe/phoenix/play-geojson/;publish=1")
 
-import ReleaseTransformations._
-releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,
-  inquireVersions,
-  runTest, 
-  setReleaseVersion,
-  commitReleaseVersion,
-  tagRelease,
-  publishArtifacts,
-  releaseStepCommand("sonatypeRelease"),
-  setNextVersion,
-  commitNextVersion,
-  pushChanges
-)
+// Release settings
+// sonatypeProfileName := "com.typesafe"
+// releasePublishArtifactsAction := PgpKeys.publishSigned.value
+// releaseCrossBuild := true
+// releaseTagName := (version in ThisBuild).value
+
+// import ReleaseTransformations._
+// releaseProcess := Seq[ReleaseStep](
+//   checkSnapshotDependencies,
+//   inquireVersions,
+//   runTest,
+//   setReleaseVersion,
+//   commitReleaseVersion,
+//   tagRelease,
+//   publishArtifacts,
+//   releaseStepCommand("sonatypeRelease"),
+//   setNextVersion,
+//   commitNextVersion,
+//   pushChanges
+// )
 

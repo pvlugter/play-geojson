@@ -4,7 +4,6 @@ import scala.collection.immutable.Seq
 import play.api.libs.json._
 import play.api.libs.functional._
 import play.api.libs.functional.syntax._
-import play.api.data.validation.ValidationError
 
 /**
  * A GeoJSON object.
@@ -267,14 +266,14 @@ private object GeoFormats {
    * Reads the GeoJSON type property.
    */
   def readType: Reads[String] = (__ \ "type").read[String]
-  
+
   /**
    * Reads a GeoJSON type property with the given type.
    *
    * If the type is not the given name, a validation error is thrown.
    */
   def filterType(geoJsonType: String): Reads[String] =
-    readType.filter(ValidationError("Geometry is not a " + geoJsonType))(_ == geoJsonType)
+    readType.filter(JsonValidationError("Geometry is not a " + geoJsonType))(_ == geoJsonType)
 
   /**
    * Writes for the GeoJSON type property for the given type.
